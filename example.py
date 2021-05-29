@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter.ttk import *
+from tkinter.font import Font
+from tkinter.messagebox import showerror
 
 from PIL import Image, ImageTk
 
@@ -51,15 +53,25 @@ def main():
                         image=image_dict, text=btn_text)
 
     btn_text.pop('textoffset')
+    btn_text['font'] = Font(family='Calibri')
     # Text button:
     btn4 = CanvasButton(centersection, x=centersection.width*0.75,
-                        y=centersection.height*0.5,
+                        y=centersection.height*0.4,
                         text=btn_text)
 
+    btn_text.update({'text': 'error msg', 'fill': 'lime'})
+    # Button with a callback.
+    btn5 = CanvasButton(centersection, x=centersection.width*0.75,
+                        y=centersection.height*0.5,
+                        text=btn_text,
+                        command=lambda e: showerror('title', 'message'))
+
     # Create a simple, no image, checkbox.
-    colors = {'font': 'blue', 'background': 'white', 'check': 'red'}
+    colors = {'font': 'blue', 'background': 'white', 'check': 'green'}
     SimpleCanvasCheckbox(centersection, centersection.width*0.1,
-                         centersection.height*0.7, 20, 20, colors=colors, extra_txt='Checkbox')
+                         centersection.height*0.7, 20, 20, colors=colors,
+                         font=Font(family='Times New Roman'),
+                         extra_txt='Checkbox')
 
     mainframe.pack(expand=True, fill=BOTH)
     maincanvas.pack(expand=True, fill=BOTH)
